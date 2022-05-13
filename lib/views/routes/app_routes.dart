@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:rjc_codelab_4/views/pages/donut_main_page.dart';
 
-import '../pages/donut_shop_main.dart';
+import '../components/donut_shop_main.dart';
 import '../pages/splash_page.dart';
 
 abstract class AppRouteName {
@@ -16,14 +17,13 @@ abstract class AppRoutes {
     AppRouteName.main: (_) => const DonutShopMain(),
   };
 
-  static Route<dynamic>? Function(RouteSettings)? appGenerateRoute = (RouteSettings settings) {
+  static Route<dynamic>? Function(RouteSettings)? appGenerateRoute =
+      (RouteSettings settings) {
     Widget page;
 
     switch (settings.name) {
       case AppRouteName.main:
-        page = const Center(
-          child: Text('main'),
-        );
+        page = const DonutMainPage();
         break;
       case AppRouteName.favorites:
         page = const Center(
@@ -36,9 +36,7 @@ abstract class AppRoutes {
         );
         break;
       default:
-        page = const Center(
-          child: Text('main'),
-        );
+        page = const DonutMainPage();
         break;
     }
 

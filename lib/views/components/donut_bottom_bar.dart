@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:rjc_codelab_4/constants/constants.dart';
-import 'package:rjc_codelab_4/providers/donut_bottom_bar_selection_services.dart';
 import 'package:rjc_codelab_4/views/routes/app_routes.dart';
+
+import '../../data/providers/donut_bottom_bar_selection_services.dart';
 
 class DonutBottomBar extends StatelessWidget {
   const DonutBottomBar({Key? key}) : super(key: key);
