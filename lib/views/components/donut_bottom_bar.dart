@@ -11,7 +11,7 @@ class DonutBottomBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.all(30),
+      padding: const EdgeInsets.fromLTRB(30, 5, 30, 20),
       child: Consumer<DonutBottomBarSelectionService>(
         builder: (_, bottomBarSelectionService, child) {
           return Row(
@@ -24,32 +24,36 @@ class DonutBottomBar extends StatelessWidget {
                 },
                 icon: Icon(
                   Icons.trip_origin_rounded,
-                  color: bottomBarSelectionService.tabSelection == AppRouteName.main
+                  color: bottomBarSelectionService.tabSelection ==
+                          AppRouteName.main
                       ? AppColor.mainDark
                       : AppColor.mainColor,
                 ),
               ),
               IconButton(
                 onPressed: () {
-                  bottomBarSelectionService.setTabSelection(AppRouteName.favorites);
+                  bottomBarSelectionService
+                      .setTabSelection(AppRouteName.favorites);
                 },
                 icon: Icon(
                   Icons.favorite_rounded,
-                  color: bottomBarSelectionService.tabSelection == AppRouteName.favorites
+                  color: bottomBarSelectionService.tabSelection ==
+                          AppRouteName.favorites
                       ? AppColor.mainDark
                       : AppColor.mainColor,
                 ),
               ),
               IconButton(
                 onPressed: () {
-                  bottomBarSelectionService.setTabSelection(AppRouteName.shoppingCart);
+                  bottomBarSelectionService
+                      .setTabSelection(AppRouteName.shoppingCart);
                 },
                 icon: Icon(
                   Icons.shopping_cart_rounded,
-                  color:
-                      bottomBarSelectionService.tabSelection == AppRouteName.shoppingCart
-                          ? AppColor.mainDark
-                          : AppColor.mainColor,
+                  color: bottomBarSelectionService.tabSelection ==
+                          AppRouteName.shoppingCart
+                      ? AppColor.mainDark
+                      : AppColor.mainColor,
                 ),
               ),
             ],
