@@ -19,14 +19,6 @@ class _DonutListState extends State<DonutList> {
   @override
   void initState() {
     var future = Future(() {});
-    // for (int i = 0; i < widget.donuts!.length; i++) {
-    //   future = future.then((_) {
-    //     return Future.delayed(const Duration(milliseconds: 125), () {
-    //       insertedItems.add(widget.donuts![i]);
-    //       _key.currentState!.insertItem(i);
-    //     });
-    //   });
-    // }
     for (var i in widget.donuts!) {
       future = future.then((_) {
         return Future.delayed(const Duration(milliseconds: 125), () {
