@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:rjc_codelab_4/constants/constants.dart';
 import 'package:rjc_codelab_4/data/models/donut_model.dart';
+import 'package:rjc_codelab_4/data/providers/donut_favorites_service.dart';
 import 'package:rjc_codelab_4/data/providers/donut_service.dart';
 import 'package:rjc_codelab_4/data/providers/donut_shopping_cart_service.dart';
 import 'package:rjc_codelab_4/views/components/donut_shopping_cart_badge.dart';
@@ -101,10 +102,22 @@ class _DonutShopDetailsPageState extends State<DonutShopDetailsPage>
                         ),
                       ),
                       const SizedBox(width: 50),
-                      IconButton(
-                        onPressed: () {},
-                        icon: const Icon(Icons.favorite_outline_rounded),
-                        color: AppColor.mainDark,
+                      Consumer<DonutFavoritesService>(
+                        builder: (_, provider, __) {
+                          return IconButton(
+                            onPressed: () {
+                              if (provider.isDonutInFavorites(selectedDonut!)) {
+                                provider.removeFromFavorites(selectedDonut!);
+                              } else {
+                                provider.addToFavorites(selectedDonut!);
+                              }
+                            },
+                            icon: provider.isDonutInFavorites(selectedDonut!)
+                                ? const Icon(Icons.favorite_rounded)
+                                : const Icon(Icons.favorite_outline_rounded),
+                            color: AppColor.mainDark,
+                          );
+                        },
                       ),
                     ],
                   ),
@@ -155,30 +168,88 @@ class _DonutShopDetailsPageState extends State<DonutShopDetailsPage>
                         );
                       }
 
-                      return GestureDetector(
-                        onTap: () {
-                          provider.removeFromCart(selectedDonut!);
-                        },
-                        child: Padding(
-                          padding: const EdgeInsets.symmetric(vertical: 25),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: const [
-                              Icon(
-                                Icons.check_rounded,
-                                color: AppColor.mainDark,
-                              ),
-                              SizedBox(width: 20),
-                              Text(
-                                'Added to Cart',
-                                style: TextStyle(
-                                  fontWeight: FontWeight.bold,
+                      return Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Padding(
+                            padding: const EdgeInsets.symmetric(vertical: 25),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: const [
+                                Icon(
+                                  Icons.check_rounded,
                                   color: AppColor.mainDark,
+                                ),
+                                SizedBox(width: 20),
+                                Text(
+                                  'Added to Cart',
+                                  style: TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                    color: AppColor.mainDark,
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                          Row(
+                            children: [
+                              GestureDetector(
+                                onTap: () {
+                                  provider.removeFromCart(selectedDonut!);
+                                },
+                                child: Container(
+                                  alignment: Alignment.center,
+                                  width: 40,
+                                  height: 40,
+                                  padding:
+                                      const EdgeInsets.fromLTRB(5, 5, 5, 5),
+                                  decoration: BoxDecoration(
+                                    color: AppColor.mainDark.withOpacity(0.1),
+                                    borderRadius: BorderRadius.circular(5),
+                                  ),
+                                  child: const Icon(
+                                    Icons.remove_rounded,
+                                    color: AppColor.mainColor,
+                                  ),
+                                ),
+                              ),
+                              const SizedBox(width: 10),
+                              Container(
+                                alignment: Alignment.center,
+                                width: 40,
+                                height: 40,
+                                padding: const EdgeInsets.fromLTRB(5, 5, 5, 5),
+                                decoration: BoxDecoration(
+                                  color: AppColor.mainDark.withOpacity(0.1),
+                                  borderRadius: BorderRadius.circular(5),
+                                ),
+                                child:
+                                    Text(provider.cartDonuts.length.toString()),
+                              ),
+                              const SizedBox(width: 10),
+                              GestureDetector(
+                                onTap: () {
+                                  provider.addToCart(selectedDonut!);
+                                },
+                                child: Container(
+                                  alignment: Alignment.center,
+                                  width: 40,
+                                  height: 40,
+                                  padding:
+                                      const EdgeInsets.fromLTRB(5, 5, 5, 5),
+                                  decoration: BoxDecoration(
+                                    color: AppColor.mainDark.withOpacity(0.1),
+                                    borderRadius: BorderRadius.circular(5),
+                                  ),
+                                  child: const Icon(
+                                    Icons.add_rounded,
+                                    color: AppColor.mainColor,
+                                  ),
                                 ),
                               ),
                             ],
                           ),
-                        ),
+                        ],
                       );
                     },
                   )

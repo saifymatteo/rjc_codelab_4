@@ -10,7 +10,7 @@ class DonutShoppingCartService extends ChangeNotifier {
   }
 
   void removeFromCart(DonutModel donut) {
-    cartDonuts.removeWhere((element) => element.name == donut.name);
+    cartDonuts.remove(donut);
     notifyListeners();
   }
 
