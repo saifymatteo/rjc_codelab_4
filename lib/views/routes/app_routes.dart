@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:rjc_codelab_4/views/pages/donut_favorites_page.dart';
 import 'package:rjc_codelab_4/views/pages/donut_shop_details_page.dart';
 import 'package:rjc_codelab_4/views/pages/donut_main_page.dart';
 import 'package:rjc_codelab_4/views/pages/donut_shopping_cart_page.dart';
@@ -19,6 +20,7 @@ abstract class AppRoutes {
     AppRouteName.index: (_) => const SplashPage(),
     AppRouteName.main: (_) => const DonutShopMain(),
     AppRouteName.details: (_) => const DonutShopDetailsPage(),
+    AppRouteName.favorites: (_) => const DonutFavoritesPage(),
     AppRouteName.shoppingCart: (_) => const DonutShoppingCartPage(),
   };
 
@@ -31,9 +33,7 @@ abstract class AppRoutes {
         page = const DonutMainPage();
         break;
       case AppRouteName.favorites:
-        page = const Center(
-          child: Text('favorites'),
-        );
+        page = const DonutFavoritesPage();
         break;
       case AppRouteName.shoppingCart:
         page = const DonutShoppingCartPage();

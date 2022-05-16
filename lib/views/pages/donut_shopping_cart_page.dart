@@ -74,6 +74,7 @@ class _DonutShoppingCartPageState extends State<DonutShoppingCartPage>
                 }
                 return DonutShoppingList(
                   donutCart: provider.cartDonuts,
+                  isShoppingList: true,
                 );
               },
             ),

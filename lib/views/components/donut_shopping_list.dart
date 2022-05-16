@@ -3,9 +3,10 @@ import 'package:rjc_codelab_4/data/models/donut_model.dart';
 import 'package:rjc_codelab_4/views/components/donut_shopping_list_row.dart';
 
 class DonutShoppingList extends StatefulWidget {
-  const DonutShoppingList({Key? key, this.donutCart}) : super(key: key);
+  const DonutShoppingList({Key? key, this.donutCart, this.isShoppingList = true}) : super(key: key);
 
   final List<DonutModel>? donutCart;
+  final bool? isShoppingList;
 
   @override
   State<DonutShoppingList> createState() => _DonutShoppingListState();
@@ -50,6 +51,7 @@ class _DonutShoppingListState extends State<DonutShoppingList> {
             ),
             child: DonutShoppingListRow(
               donut: currentDonut,
+              isShoppingList: widget.isShoppingList!,
             ),
           ),
         );

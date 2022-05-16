@@ -4,10 +4,13 @@ import 'package:rjc_codelab_4/constants/colors.dart';
 import 'package:rjc_codelab_4/data/models/donut_model.dart';
 import 'package:rjc_codelab_4/data/providers/donut_shopping_cart_service.dart';
 
+import '../../data/providers/donut_favorites_service.dart';
+
 class DonutShoppingListRow extends StatelessWidget {
-  const DonutShoppingListRow({Key? key, this.donut}) : super(key: key);
+  const DonutShoppingListRow({Key? key, this.donut, this.isShoppingList = true}) : super(key: key);
 
   final DonutModel? donut;
+  final bool isShoppingList;
 
   @override
   Widget build(BuildContext context) {
@@ -55,11 +58,23 @@ class DonutShoppingListRow extends StatelessWidget {
             ),
           ),
           const SizedBox(width: 10),
-          Consumer<DonutShoppingCartService>(
+          isShoppingList ? Consumer<DonutShoppingCartService>(
             builder: (context, provider, child) {
               return IconButton(
                 onPressed: () {
                   provider.removeFromCart(donut!);
+                },
+                icon: const Icon(
+                  Icons.delete_forever_rounded,
+                  color: AppColor.mainColor,
+                ),
+              );
+            },
+          ) : Consumer<DonutFavoritesService>(
+            builder: (context, provider, child) {
+              return IconButton(
+                onPressed: () {
+                  provider.removeFromFavorites(donut!);
                 },
                 icon: const Icon(
                   Icons.delete_forever_rounded,
