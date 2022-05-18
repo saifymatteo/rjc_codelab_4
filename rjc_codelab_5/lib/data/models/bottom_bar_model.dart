@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 class FlutterBankBottomBarModel {
   String? label;
   IconData? icon;
-  Function? action;
+  void Function()? action;
 
   FlutterBankBottomBarModel({this.action, this.icon, this.label});
 }

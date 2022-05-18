@@ -23,36 +23,43 @@ class AccountActionCard extends StatelessWidget {
       children: List.generate(accounts!.length, (index) {
         Account currentAccount = accounts![index];
 
-        return Container(
-          margin: const EdgeInsets.all(5),
-          padding: const EdgeInsets.all(15),
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(10),
-            color: Colors.white,
-            boxShadow: [
-              BoxShadow(
-                color: Colors.black.withOpacity(0.1),
-                blurRadius: 20,
-                offset: const Offset(0.0, 5.0),
+        return Expanded(
+          child: GestureDetector(
+            onTap: () {
+              bankService.setSelectedAccount(currentAccount);
+            },
+            child: Container(
+              margin: const EdgeInsets.all(5),
+              padding: const EdgeInsets.all(15),
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(10),
+                color: Colors.white,
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.black.withOpacity(0.1),
+                    blurRadius: 20,
+                    offset: const Offset(0.0, 5.0),
+                  ),
+                ],
+                border: Border.all(
+                  width: 5,
+                  color: selectedAccount != null &&
+                          selectedAccount!.id == currentAccount.id
+                      ? AppColor.mainThemeColor
+                      : Colors.transparent,
+                ),
               ),
-            ],
-            border: Border.all(
-              width: 5,
-              color: selectedAccount != null &&
-                      selectedAccount!.id == currentAccount.id
-                  ? AppColor.mainThemeColor
-                  : Colors.transparent,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    '${currentAccount.type!.toUpperCase()} ACCT',
+                    style: const TextStyle(color: AppColor.mainThemeColor),
+                  ),
+                  Text(currentAccount.accountNumber!),
+                ],
+              ),
             ),
-          ),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                '${currentAccount.type!.toUpperCase()} ACCT',
-                style: const TextStyle(color: AppColor.mainThemeColor),
-              ),
-              Text(currentAccount.accountNumber!),
-            ],
           ),
         );
       }),

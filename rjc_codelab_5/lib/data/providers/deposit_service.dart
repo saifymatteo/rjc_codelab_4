@@ -13,7 +13,5 @@ class DepositService extends ChangeNotifier {
     notifyListeners();
   }
 
-  bool checkAmountToDeposit() {
-    return amountToDeposit > 0;
-  }
+  bool get checkAmountToDeposit => amountToDeposit > 0;
 }

@@ -6,6 +6,7 @@ import 'package:provider/provider.dart';
 import 'package:rjc_codelab_5/data/providers/bank_service.dart';
 import 'package:rjc_codelab_5/data/providers/deposit_service.dart';
 import 'package:rjc_codelab_5/data/providers/login_service.dart';
+import 'package:rjc_codelab_5/data/providers/withdrawal_service.dart';
 import 'package:rjc_codelab_5/views/routes/routes.dart';
 
 void main() async {
@@ -31,6 +32,7 @@ void main() async {
         ChangeNotifierProvider(create: (_) => LoginService()),
         ChangeNotifierProvider(create: (_) => FlutterBankService()),
         ChangeNotifierProvider(create: (_) => DepositService()),
+        ChangeNotifierProvider(create: (_) => WithdrawalService()),
       ],
       child: const FlutterBankApp(),
     ),

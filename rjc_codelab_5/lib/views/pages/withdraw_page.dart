@@ -2,15 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:rjc_codelab_5/constants/constants.dart';
 import 'package:rjc_codelab_5/data/providers/bank_service.dart';
-import 'package:rjc_codelab_5/data/providers/deposit_service.dart';
+import 'package:rjc_codelab_5/data/providers/withdrawal_service.dart';
 import 'package:rjc_codelab_5/views/components/account_action_header.dart';
 import 'package:rjc_codelab_5/views/components/account_action_selection.dart';
-import 'package:rjc_codelab_5/views/components/account_deposit_slider.dart';
+import 'package:rjc_codelab_5/views/components/account_withdrawal_slider.dart';
 import 'package:rjc_codelab_5/views/components/main_button.dart';
 import 'package:rjc_codelab_5/views/components/transaction_completion_page.dart';
 
-class FlutterBankDepositPage extends StatelessWidget {
-  const FlutterBankDepositPage({Key? key}) : super(key: key);
+class FlutterBankWithdrawalPage extends StatelessWidget {
+  const FlutterBankWithdrawalPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -27,8 +27,8 @@ class FlutterBankDepositPage extends StatelessWidget {
           elevation: 0,
           iconTheme: const IconThemeData(color: AppColor.mainThemeColor),
           backgroundColor: Colors.transparent,
-          title: const Icon(AppIcon.mainIcon, size: 40),
           centerTitle: true,
+          title: const Icon(AppIcon.mainIcon, size: 40),
         ),
         body: Container(
           padding: const EdgeInsets.all(20),
@@ -36,26 +36,26 @@ class FlutterBankDepositPage extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
               const AccountActionHeader(
-                title: 'Deposit',
-                icon: Icons.login_rounded,
+                title: 'Withdraw',
+                icon: Icons.logout_rounded,
               ),
               const Expanded(
                 child: AccountActionSelection(
-                  actionTypeLabel: 'To',
-                  amountChanger: AccountDepositSlider(),
+                  actionTypeLabel: 'From',
+                  amountChanger: AccountWithdrawalSlider(),
                 ),
               ),
-              Consumer<DepositService>(
-                builder: (context, provider, child) {
+              Consumer<WithdrawalService>(
+                builder: (_, provider, __) {
                   return FlutterBankMainButton(
-                    enabled: provider.checkAmountToDeposit,
-                    label: 'Make Deposit',
-                    onTap: provider.checkAmountToDeposit
+                    enabled: provider.checkAmountToWithdraw,
+                    label: 'Make Withdrawal',
+                    onTap: provider.checkAmountToWithdraw
                         ? () {
                             Navigator.of(context).pushReplacement(
                               MaterialPageRoute(
                                 builder: (_) => const TransactionCompletionPage(
-                                  isDeposit: true,
+                                  isDeposit: false,
                                 ),
                               ),
                             );

@@ -3,6 +3,7 @@ import 'package:provider/provider.dart';
 import 'package:rjc_codelab_5/constants/constants.dart';
 import 'package:rjc_codelab_5/helpers/validation.dart';
 import 'package:rjc_codelab_5/views/components/input_field.dart';
+import 'package:rjc_codelab_5/views/components/loading.dart';
 import 'package:rjc_codelab_5/views/components/main_button.dart';
 import 'package:rjc_codelab_5/views/routes/routes.dart';
 
@@ -140,18 +141,29 @@ class _FlutterBankLoginPageState extends State<FlutterBankLoginPage> {
               label: 'Sign In',
               enabled: validateEmailAndPassword(),
               onTap: () async {
+                final navigator = Navigator.of(context);
                 var username = usernameController.value.text;
                 var password = passwordController.value.text;
 
+                showDialog(
+                  context: context,
+                  builder: (context) {
+                    return const FlutterBankLoading();
+                    // return const Center(
+                    //   child: CircularProgressIndicator(),
+                    // );
+                  },
+                );
                 bool isLoggedIn = await loginService.signInWithEmailAndPassword(
                     username, password);
+
+                navigator.pop();
 
                 if (isLoggedIn) {
                   usernameController.clear();
                   passwordController.clear();
 
-                  if (!mounted) return;
-                  Navigator.of(context).pushReplacementNamed(AppRouteName.main);
+                  navigator.pushReplacementNamed(AppRouteName.main);
                 }
               },
             ),

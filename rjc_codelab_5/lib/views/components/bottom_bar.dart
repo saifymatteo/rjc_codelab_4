@@ -10,34 +10,34 @@ class FlutterBankBottomBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     List<FlutterBankBottomBarModel> bottomItems =
-        FlutterBankBottomBarRepo.getBottomBarItems();
+        FlutterBankBottomBarRepo.getBottomBarItems(context);
 
-    return Material(
-      color: Colors.transparent,
-      borderRadius: BorderRadius.circular(10),
-      clipBehavior: Clip.antiAlias,
-      child: InkWell(
-        highlightColor: AppColor.mainThemeColor.withOpacity(0.2),
-        splashColor: AppColor.mainThemeColor.withOpacity(0.1),
-        onTap: () {},
-        child: Container(
-          height: 100,
-          padding: const EdgeInsets.all(20),
-          decoration: BoxDecoration(
-            color: Colors.white,
-            boxShadow: [
-              BoxShadow(
-                color: AppColor.mainThemeColor.withOpacity(0.05),
-                blurRadius: 10,
-                offset: Offset.zero,
-              ),
-            ],
+    return Container(
+      height: 100,
+      padding: const EdgeInsets.all(20),
+      decoration: BoxDecoration(
+        color: Colors.white,
+        boxShadow: [
+          BoxShadow(
+            color: AppColor.mainThemeColor.withOpacity(0.05),
+            blurRadius: 10,
+            offset: Offset.zero,
           ),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
-            children: List.generate(bottomItems.length, (index) {
-              FlutterBankBottomBarModel currentItem = bottomItems[index];
-              return Container(
+        ],
+      ),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceAround,
+        children: List.generate(bottomItems.length, (index) {
+          FlutterBankBottomBarModel currentItem = bottomItems[index];
+          return Material(
+            color: Colors.transparent,
+            borderRadius: BorderRadius.circular(10),
+            clipBehavior: Clip.antiAlias,
+            child: InkWell(
+              highlightColor: AppColor.mainThemeColor.withOpacity(0.2),
+              splashColor: AppColor.mainThemeColor.withOpacity(0.1),
+              onTap: currentItem.action,
+              child: Container(
                 constraints: const BoxConstraints(minWidth: 80),
                 padding: const EdgeInsets.all(10),
                 child: Column(
@@ -58,10 +58,10 @@ class FlutterBankBottomBar extends StatelessWidget {
                     ),
                   ],
                 ),
-              );
-            }),
-          ),
-        ),
+              ),
+            ),
+          );
+        }),
       ),
     );
   }
