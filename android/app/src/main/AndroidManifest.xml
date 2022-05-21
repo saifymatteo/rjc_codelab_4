@@ -1,5 +1,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.saifymatteo.rjc_codelab_4">
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    
    <application
         android:label="rjc_codelab_4"
         android:name="${applicationName}"
