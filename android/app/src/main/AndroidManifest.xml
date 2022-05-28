@@ -4,7 +4,7 @@
     <uses-permission android:name="android.permission.INTERNET" />
     
    <application
-        android:label="rjc_codelab_4"
+        android:label="RJC Codelab 4"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity
